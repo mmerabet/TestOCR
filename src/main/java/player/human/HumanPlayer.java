@@ -8,7 +8,10 @@ public class HumanPlayer extends AbstractPlayer {
     }
 
     @Override
-    public Integer askConbinaison() {
+    public Integer askConbinaison()
+    {
+        //implémente ce que c'est Human
+
         return null;
     }
 }

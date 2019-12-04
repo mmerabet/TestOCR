@@ -15,6 +15,8 @@ public abstract class AbstractGame {
     public AbstractGame(GameConfig gconfig) {
         this.gconfig = gconfig;
     }
+
+
     //ici on lance une partie entre deux joueurs (IA et humain)
     public abstract GameResult playGame(AbstractPlayer player1, AbstractPlayer player2);
 

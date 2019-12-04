@@ -15,7 +15,7 @@ public class Main {
         GameConfig gameConfig = new ConfigReader().read();
 
         /**
-         * Ici, il faut créer le bon mode de jeu en fonction du choix de l'utilisateur.
+         * Ici, ezzer il faut créer le bon mode de jeu en fonction du choix de l'utilisateur.
          */
         AbstractGame game = new ChallengerGame(gameConfig);
 
