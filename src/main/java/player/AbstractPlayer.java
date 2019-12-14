@@ -10,9 +10,11 @@ public abstract class AbstractPlayer {
         this.sizeCombi = sizeCombi;
     }
 
-    public abstract Integer askConbinaison();
+    public abstract String askConbinaison();
 
     public Integer getSizeCombi() {
         return sizeCombi;
     }
+
+    public abstract String feedback(String proposition);
 }

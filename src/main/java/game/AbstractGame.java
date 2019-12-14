@@ -23,4 +23,13 @@ public abstract class AbstractGame {
     public GameConfig getGconfig() {
         return gconfig;
     }
+
+    public Boolean isFeedbackWin(String feedback){
+        for (char c:feedback.toCharArray()){
+            if (c != '='){
+                return false;
+            }
+        }
+        return true;
+    }
 }
