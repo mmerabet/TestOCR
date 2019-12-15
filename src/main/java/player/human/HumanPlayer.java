@@ -18,11 +18,11 @@ public class HumanPlayer extends AbstractPlayer {
             String prop = sc.nextLine();
             if (prop.length() != getSizeCombi()) {
                 System.out.println("\n--------------------------------------------------------------------" +
-                        "Erreur de contenu. Veuillez effectuer une nouvelle saisie." +
+                        "\nErreur de contenu. Veuillez effectuer une nouvelle saisie." +
                         "\n--------------------------------------------------------------------");
             }else if (prop.matches("[^0-9]")) {
                 System.out.println("\n--------------------------------------------------------------------" +
-                        "Erreur de contenu. Veuillez effectuer une nouvelle saisie." +
+                        "\nErreur de contenu. Veuillez effectuer une nouvelle saisie." +
                         "\n--------------------------------------------------------------------");
             }else {
                 this.code = prop;

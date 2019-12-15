@@ -40,7 +40,7 @@ public class ChoixMode {
                 return GameMode.DUEL;
 
             } else {
-                System.out.println("Veuillez réitérer votre saisie");
+                System.out.println("Veuillez réitérer votre saisie\n------------------------------");
                 afficherModes();
             }
         }
