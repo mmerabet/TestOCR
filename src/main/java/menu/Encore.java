@@ -1,5 +1,7 @@
 package menu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,14 +20,19 @@ public class Encore {
     public static ChoixEncore reboot(){
         while (true){
             String choix = sc.next();
-            if (choix.contains("o") || choix.contains("O")){
+            if (choix.length()>1){
+                System.out.println("Saisie incorrect, veuillez saisir 'O' ou 'N'.");
+            } else if (choix.contains("o") || choix.contains("O")){
                 System.out.println("Nouvelle partie lancée.");
                 return ChoixEncore.O;
             } else if (choix.contains("n") || choix.contains("N")){
                 System.out.println("Merci d'avoir joué !");
                 return ChoixEncore.N;
+            }else {
+                System.out.println("Saisie incorrect, veuillez saisir 'O' ou 'N'.");
             }
         }
     }
+
 
 }

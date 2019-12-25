@@ -3,10 +3,7 @@ import game.AbstractGame;
 import game.challenger.ChallengerGame;
 import game.defenseur.DefenseurGame;
 import game.duel.DuelGame;
-import menu.ChoixEncore;
-import menu.ChoixMode;
-import menu.Encore;
-import menu.GameMode;
+import menu.*;
 import player.AbstractPlayer;
 import player.human.HumanPlayer;
 import player.ia.IAPlayer;
@@ -16,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         boolean b = false;
+        int i=1;
         /**
          * 1ere étape
          * On charge la configuration du jeu.
@@ -61,19 +59,21 @@ public class Main {
             /**
              * 5eme étape
              * Fin du jeu, on demande à l'utilisateur si il souhaite rejouer ou quitter
+             * On ajoute une partie à l'historique des parties en précisant le mode de jeu et le résultat.
              */
-
+            CountGame.CountGame(i,gameMode);
             Encore.askReboot();
             ChoixEncore choixEncore = Encore.reboot();
             switch (choixEncore) {
                 case O:
                     b = true;
+                    i++;
                     break;
                 case N:
                     b = false;
                     break;
             }
-        }  while( b == true);
+        } while (b == true);
 
-        }
+    }
 }

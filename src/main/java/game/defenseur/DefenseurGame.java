@@ -16,18 +16,18 @@ public class DefenseurGame extends AbstractGame {
     }
 
     @Override
-    public GameResult playGame(AbstractPlayer defenseur, AbstractPlayer attaquant) {
+    public GameResult playGame(AbstractPlayer IAPlayer, AbstractPlayer HumanPlayer) {
 
-        String code = defenseur.askConbinaison();
+        String code = IAPlayer.askConbinaison();
         if (getGconfig().getDevMod()){
-            System.out.println("DevModeActivé:"+code);
+           System.out.println("DevModeActivé:"+code);
         }
         Integer i = 1;
         Integer maxTry = getGconfig().getTryNum();
         while (i <= maxTry) {
             System.out.println("Vous devez cracker un code long de " + getGconfig().getSizeCombi() + " caractères.\nNombre d'essais : " + i + "/" + maxTry + ".");
-            String proposition = attaquant.askConbinaison();
-            String userFeedback = defenseur.feedback(proposition);
+            String proposition = HumanPlayer.askConbinaison();
+            String userFeedback = IAPlayer.feedback(proposition);
             if (isFeedbackWin(userFeedback)){
                 System.out.println("Gagné !!!\nLe code était bien " + code + "\n--------------------------------------------------------------------");
                 return GameResult.PLAYER2_WIN;

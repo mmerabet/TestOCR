@@ -14,8 +14,8 @@ public class ChoixMode {
     public static void afficherModes(){
         System.out.println("Veuillez sélectionner un mode de jeu : "+ "\n" +
                 " \n" +
-                " 1 - Défenseur\n" +
-                " 2 - Challenger\n" +
+                " 1 - Challenger\n" +
+                " 2 - Défenseur\n" +
                 " 3 - Duel ");
     }
 
@@ -26,12 +26,12 @@ public class ChoixMode {
     public static GameMode demanderMode(){
         while (true) {
             String Choix = sc.nextLine();
-            if (Choix.contains("1") || Choix.contains("Défenseur") || Choix.contains("défenseur")
+            if (Choix.contains("2") || Choix.contains("Défenseur") || Choix.contains("défenseur")
                     || Choix.contains("Defenseur") || Choix.contains("defenseur")) {
                 System.out.println("Mode sélectionné : Défenseur.");
                 return GameMode.DEFENSEUR;
 
-            } else if (Choix.contains("2") || Choix.contains("Challenger") || Choix.contains("challenger")) {
+            } else if (Choix.contains("1") || Choix.contains("Challenger") || Choix.contains("challenger")) {
                 System.out.println("Mode sélectionné : Challenger.");
                 return GameMode.CHALLENGER;
 
