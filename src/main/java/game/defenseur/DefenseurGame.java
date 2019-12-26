@@ -5,6 +5,8 @@ import game.AbstractGame;
 import game.GameResult;
 import player.AbstractPlayer;
 
+import java.util.List;
+
 public class DefenseurGame extends AbstractGame {
 
     /**
@@ -27,13 +29,14 @@ public class DefenseurGame extends AbstractGame {
         while (i <= maxTry) {
             System.out.println("Vous devez cracker un code long de " + getGconfig().getSizeCombi() + " caractères.\nNombre d'essais : " + i + "/" + maxTry + ".");
             String proposition = HumanPlayer.askConbinaison();
-            String userFeedback = IAPlayer.feedback(proposition);
-            if (isFeedbackWin(userFeedback)){
+            List<String> userFeedback=null;
+            String userFeedbacks = IAPlayer.feedback(proposition, userFeedback);
+            if (isFeedbackWin(userFeedbacks)){
                 System.out.println("Gagné !!!\nLe code était bien " + code + "\n--------------------------------------------------------------------");
                 return GameResult.PLAYER2_WIN;
             } else {
                 System.out.println("Mauvaise combinaison :/");
-                System.out.println("Voici le rendu de votre proposition : " + userFeedback
+                System.out.println("Voici le rendu de votre proposition : " + userFeedbacks
                         + "\n--------------------------------------------------------------------");
                 i++;
                 if (i == maxTry - 1) {

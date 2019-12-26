@@ -1,7 +1,6 @@
 package player.human;
 
 import configuration.GameConfig;
-import menu.GameMode;
 import player.AbstractPlayer;
 
 import java.util.ArrayList;
@@ -41,13 +40,16 @@ public class HumanPlayer extends AbstractPlayer {
 
 
     @Override
-    public String feedback(String proposition){
+    public String feedback(String proposition, List<String> userFeedback){
         Scanner sc = new Scanner(System.in);
-        List<String> userFeedback = new ArrayList<String>();
-
+        List<Character> userFeedbacks = new ArrayList<>();
+        String test = userFeedback.get(0);
+        for (int i=0; i<getSizeCombi();i++){
+            userFeedbacks.add(i,test.charAt(i));
+        }
         boolean c = false;
        do{
-            System.out.println("Voici ce qu'à trouvé la machine comme proposition pour votre code" + proposition + " (pour rappel votre code est : "+code+" )."
+            System.out.println("Voici ce qu'à trouvé la machine comme proposition pour votre code " + proposition + " (pour rappel votre code est : "+code+" )."
             +"\nQu'en pensez-vous ?"+
             "\n----------------------------------------------------------------------------" +
             "\nSi la valeur donnée est plus importante que celle du code, répondez par +"+
@@ -56,7 +58,7 @@ public class HumanPlayer extends AbstractPlayer {
             "\n----------------------------------------------------------------------------");
             String retour = sc.nextLine();
             for (int i=0;i<getSizeCombi();i++){
-                String conditionA=userFeedback.get(i);
+                String conditionA=Character.toString(userFeedbacks.get(i));
                 String conditionB=Character.toString(retour.charAt(i));
                 if (retour.length() != getSizeCombi() || retour.matches("^+-=")) {
                 System.out.println("\n--------------------------------------------------------------------" +

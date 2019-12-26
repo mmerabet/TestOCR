@@ -1,5 +1,7 @@
 package player;
 
+import java.util.List;
+
 /**
  * Ici on décrit un joueur, qui peut etre soit une IA soit un humain
  */
@@ -14,12 +16,11 @@ public abstract class AbstractPlayer {
     public abstract String askConbinaison();
 
 
-
-    public final Integer getSizeCombi() {
+    public  final Integer getSizeCombi() {
         return sizeCombi;
     }
 
-    public abstract String feedback(String proposition);
+    public abstract String feedback(String proposition, List<String> userFeedback);
 
 
 }

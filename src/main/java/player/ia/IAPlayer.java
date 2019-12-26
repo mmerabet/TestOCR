@@ -1,6 +1,5 @@
 package player.ia;
 
-import configuration.GameConfig;
 import player.AbstractPlayer;
 
 import java.util.ArrayList;
@@ -11,18 +10,19 @@ import java.util.List;
  */
 public class IAPlayer extends AbstractPlayer {
 
-    private static String code;
+    private  String code;
     private static List<Integer> prop = new ArrayList<>();
     private static List<Integer> intervalleMin = new ArrayList<>();
     private static List<Integer> intervalleMax = new ArrayList<>();
     private static List<Integer> codeList = new ArrayList<>();
-    private static GameConfig gameConfig = new GameConfig();
 
     public IAPlayer(Integer sizeCombi) {
         super(sizeCombi);
     }
 
-    private static int size = gameConfig.getSizeCombi();
+
+
+
 
     /**
      * Génere une combinaison de taille 'sizeCombi' (anciennement GenerationCodeAuto)
@@ -48,28 +48,29 @@ public class IAPlayer extends AbstractPlayer {
      * @return
      */
     @Override
-    public String feedback(String proposition) {
-        String userFeedback = "";
+    public String feedback(String proposition, List<String> userFeedback) {
+        String userFeedbacks = "";
         for (int i = 0; i < proposition.length(); i++) {
 
             Character p = proposition.charAt(i); // crée un char "p" qui prend la valeur de la i-ème valeur de prop
             Character c = code.charAt(i); // crée même chose
             if (p.equals(c)) {
-                userFeedback += "=";
+                userFeedbacks += "=";
             } else if (p.compareTo(c) > 0) {
-                userFeedback += "-";
+                userFeedbacks += "-";
             } else if (p.compareTo(c) < 0) {
-                userFeedback += "+";
+                userFeedbacks += "+";
             }
         }
-        return userFeedback;
+        return userFeedbacks;
     }
 
-    public static String init(boolean fin){
+    public static List<String> init(boolean fin, String code){
         String userFeedback = "";
         String proposition="";
-        System.out.println("gameconfig : "+size);
-        for (int i = 0; i <gameConfig.getSizeCombi(); i++) {
+        List <String> retour = new ArrayList<>();
+        int size = code.length();
+        for (int i = 0; i <size; i++) {
             intervalleMin.add(i, 0);
             intervalleMax.add(i, 10);
             int iMin = intervalleMin.get(i);
@@ -77,38 +78,40 @@ public class IAPlayer extends AbstractPlayer {
             prop.add((iMax - iMin) / 2 + iMin);
             Integer pr = prop.get(i);
             proposition += pr.toString();
-            System.out.println("Test vraiment pas opti pour proposition : " + proposition);
             int c = (code.codePointAt(i)) - 48;
             if (pr == c) {
-                preRetourUser(pr, c, i,userFeedback);
+                userFeedback+="=";
             } else if (pr < c) {
-                preRetourUser(pr, c, i,userFeedback);
+                userFeedback+="-";
             } else if (pr > c) {
-                preRetourUser(pr, c, i,userFeedback);
+                userFeedback+="+";
             }
             endGame(c, i, fin);
         }
-        System.out.println("Test pas opti de la proposition : "+proposition);
-        return proposition;
+        retour.add(0,proposition);
+        retour.add(1,userFeedback);
+        return retour;
     }
-    public static String verifCode(int j, boolean fin) {
+    public static String verifCode(int j, boolean fin, String code) {
+        List <String> retour = new ArrayList<>();
         String userFeedback = "";
         String proposition="";
-        for (int i = 0; i < gameConfig.getSizeCombi(); i++) {
+        int size = code.length();
+        for (int i = 0; i < size; i++) {
             Integer pr = prop.get(i);
             int c = (code.codePointAt(i)) - 48;
             if (pr == c) {
-                preRetourUser(pr, c, i, userFeedback);
+                userFeedback+="=";
             } else if (pr < c) {
                 intervalleMin.set(i, pr--);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
-                preRetourUser(pr, c, i, userFeedback);
+                userFeedback+="-";
             } else if (pr > c) {
                 intervalleMax.set(i, pr++);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
-                preRetourUser(pr, c, i, userFeedback);
+                userFeedback+="+";
 
             }
 
@@ -131,14 +134,5 @@ public class IAPlayer extends AbstractPlayer {
             codeList.clear();
         }
     }
-    public static void preRetourUser(int pr, int c, int i, String userFeedback) {
 
-        if (pr == c) {
-            userFeedback+= "=";
-        } else if (pr < c) {
-            userFeedback+="-";
-        } else if (pr > c) {
-            userFeedback+="+";
-        }
-    }
 }

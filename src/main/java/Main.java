@@ -12,6 +12,9 @@ import player.ia.IAPlayer;
 public class Main {
 
     public static void main(String[] args) {
+
+
+
         boolean b = false;
         int i=1;
         /**
