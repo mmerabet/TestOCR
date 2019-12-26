@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class IAPlayer extends AbstractPlayer {
 
-    private  String code;
+    private String code;
     private static List<Integer> prop = new ArrayList<>();
     private static List<Integer> intervalleMin = new ArrayList<>();
     private static List<Integer> intervalleMax = new ArrayList<>();
@@ -19,9 +19,6 @@ public class IAPlayer extends AbstractPlayer {
     public IAPlayer(Integer sizeCombi) {
         super(sizeCombi);
     }
-
-
-
 
 
     /**
@@ -65,12 +62,12 @@ public class IAPlayer extends AbstractPlayer {
         return userFeedbacks;
     }
 
-    public static List<String> init(boolean fin, String code){
+    public static List<String> init(String code) {
         String userFeedback = "";
-        String proposition="";
-        List <String> retour = new ArrayList<>();
+        String proposition = "";
+        List<String> retour = new ArrayList<>();
         int size = code.length();
-        for (int i = 0; i <size; i++) {
+        for (int i = 0; i < size; i++) {
             intervalleMin.add(i, 0);
             intervalleMax.add(i, 10);
             int iMin = intervalleMin.get(i);
@@ -80,59 +77,70 @@ public class IAPlayer extends AbstractPlayer {
             proposition += pr.toString();
             int c = (code.codePointAt(i)) - 48;
             if (pr == c) {
-                userFeedback+="=";
+                userFeedback += "=";
             } else if (pr < c) {
-                userFeedback+="-";
+                userFeedback += "-";
             } else if (pr > c) {
-                userFeedback+="+";
+                userFeedback += "+";
             }
-            endGame(c, i, fin);
         }
-        retour.add(0,proposition);
-        retour.add(1,userFeedback);
+        retour.add(0, proposition);
+        retour.add(1, userFeedback);
+        // endGame(retour,fin);
         return retour;
     }
-    public static String verifCode(int j, boolean fin, String code) {
-        List <String> retour = new ArrayList<>();
+
+
+    public static List<String> verifCode(String code) {
+        List<String> retour = new ArrayList<>();
         String userFeedback = "";
-        String proposition="";
+        String proposition = "";
         int size = code.length();
         for (int i = 0; i < size; i++) {
             Integer pr = prop.get(i);
             int c = (code.codePointAt(i)) - 48;
             if (pr == c) {
-                userFeedback+="=";
+                userFeedback += "=";
+                proposition += pr.toString();
             } else if (pr < c) {
                 intervalleMin.set(i, pr--);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
-                userFeedback+="-";
+                userFeedback += "-";
+                proposition += pr.toString();
             } else if (pr > c) {
                 intervalleMax.set(i, pr++);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
-                userFeedback+="+";
-
+                userFeedback += "+";
+                proposition += pr.toString();
             }
 
-            endGame(c, i, fin);
-            return proposition;
         }
-        if (fin == true) {
-            System.out.println("\n--------------------------------------------------------------------" +
-                    "L'ordinateur a réussi à craquer le code en " + (j = j+1) + " coups." +
-                    "\n--------------------------------------------------------------------");
-        }
-        return userFeedback;
+        retour.add(0, proposition);
+        retour.add(1, userFeedback);
+        System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
+        // endGame(retour,fin);
+
+
+        return retour;
     }
-    public static void endGame(int c, int i, boolean fin) {
-        codeList.add(i, c);
-        if (codeList.equals(prop)) {
+
+
+    public static boolean endGame(List<String> retour, boolean fin, int j) {
+        if (!retour.get(1).contains("-") && !retour.get(1).contains("+")) {
+            System.out.println("Gagné ?");
             fin = true;
+
+            System.out.println("\n--------------------------------------------------------------------" +
+                    "L'ordinateur a réussi à craquer le code en " + (j = j + 1) + " coups." +
+                    "\n--------------------------------------------------------------------");
+
+        } else {
+            fin = false;
         }
-        if (i == 3) {
-            codeList.clear();
-        }
+
+        return fin;
     }
 
 }

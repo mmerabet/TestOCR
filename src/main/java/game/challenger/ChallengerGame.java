@@ -28,20 +28,27 @@ public class ChallengerGame extends AbstractGame {
 
        /** 2eme etape dès que nous l'avons, l'algo cherche celle-ci */
         boolean fin =false;
+        int j = 1;
         int maxTry = getGconfig().getTryNum();
-        List<String> retour = IAPlayer.init(fin, code);
+        List<String> retour = IAPlayer.init(code);
         String proposition = retour.get(0);
         String userFeedback = retour.get(1);
         /** demande au joueur de vérifier ce que l'ordi a trouvé*/
         HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback));
 
         /** Fonctionne bien jusqu'ici */
-
+        IAPlayer.endGame(retour, fin, j);
+        /** Ne renvoi pas fin en true lorsque celui-ci prend cette valeur */
+        System.out.println("Fin : "+fin);
         /** 3eme etape, on rentre dans la boucle*/
         if (fin == false) {
-            for (int j = 1; j < maxTry; j++) {
-                proposition = IAPlayer.verifCode(j, fin, code);
+            for (j = 2; j < maxTry; j++) {
+                retour = IAPlayer.verifCode(code);
+                proposition = retour.get(0);
+                userFeedback = retour.get(1);
                 HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback));
+                IAPlayer.endGame(retour, fin,j);
+                System.out.println("Fin : "+fin);
                 if (fin == true) {
                     break;
                 } else if (j == maxTry - 1) {
