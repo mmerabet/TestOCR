@@ -86,15 +86,14 @@ public class IAPlayer extends AbstractPlayer {
         }
         retour.add(0, proposition);
         retour.add(1, userFeedback);
-        // endGame(retour,fin);
         return retour;
     }
 
 
     public static List<String> verifCode(String code) {
-        List<String> retour = new ArrayList<>();
         String userFeedback = "";
         String proposition = "";
+        List<String> retour = new ArrayList<>();
         int size = code.length();
         for (int i = 0; i < size; i++) {
             Integer pr = prop.get(i);
@@ -120,27 +119,8 @@ public class IAPlayer extends AbstractPlayer {
         retour.add(0, proposition);
         retour.add(1, userFeedback);
         System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
-        // endGame(retour,fin);
-
-
         return retour;
     }
 
-
-    public static boolean endGame(List<String> retour, boolean fin, int j) {
-        if (!retour.get(1).contains("-") && !retour.get(1).contains("+")) {
-            System.out.println("Gagné ?");
-            fin = true;
-
-            System.out.println("\n--------------------------------------------------------------------" +
-                    "L'ordinateur a réussi à craquer le code en " + (j = j + 1) + " coups." +
-                    "\n--------------------------------------------------------------------");
-
-        } else {
-            fin = false;
-        }
-
-        return fin;
-    }
 
 }
