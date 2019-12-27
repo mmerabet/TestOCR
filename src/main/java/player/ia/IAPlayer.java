@@ -62,11 +62,10 @@ public class IAPlayer extends AbstractPlayer {
         return userFeedbacks;
     }
 
-    public static List<String> init(String code) {
+    public static List<String> init(String code, int size) {
         String userFeedback = "";
         String proposition = "";
         List<String> retour = new ArrayList<>();
-        int size = code.length();
         for (int i = 0; i < size; i++) {
             intervalleMin.add(i, 0);
             intervalleMax.add(i, 10);
@@ -86,41 +85,37 @@ public class IAPlayer extends AbstractPlayer {
         }
         retour.add(0, proposition);
         retour.add(1, userFeedback);
+        System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
         return retour;
     }
 
 
-    public static List<String> verifCode(String code) {
+    public static List<String> verifCode(String code, int size) {
+
         String userFeedback = "";
         String proposition = "";
         List<String> retour = new ArrayList<>();
-        int size = code.length();
         for (int i = 0; i < size; i++) {
             Integer pr = prop.get(i);
             int c = (code.codePointAt(i)) - 48;
+            proposition += pr.toString();
             if (pr == c) {
                 userFeedback += "=";
-                proposition += pr.toString();
             } else if (pr < c) {
                 intervalleMin.set(i, pr--);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
                 userFeedback += "-";
-                proposition += pr.toString();
             } else if (pr > c) {
                 intervalleMax.set(i, pr++);
                 pr = (intervalleMax.get(i) - intervalleMin.get(i)) / 2 + intervalleMin.get(i);
                 prop.set(i, pr);
                 userFeedback += "+";
-                proposition += pr.toString();
             }
-
         }
         retour.add(0, proposition);
         retour.add(1, userFeedback);
         System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
         return retour;
     }
-
-
 }
