@@ -66,6 +66,9 @@ public class IAPlayer extends AbstractPlayer {
         String userFeedback = "";
         String proposition = "";
         List<String> retour = new ArrayList<>();
+        intervalleMax.clear();
+        intervalleMin.clear();
+        prop.clear();
         for (int i = 0; i < size; i++) {
             intervalleMin.add(i, 0);
             intervalleMax.add(i, 10);

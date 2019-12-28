@@ -22,10 +22,7 @@ public class ChallengerGame extends AbstractGame {
     @Override
     public GameResult playGame(AbstractPlayer attaquant, AbstractPlayer HumanPlayer) {
         GameResult result = null;
-        String proposition = "";
-        List<String> retour = new ArrayList<>();
-        retour.add(0,proposition);
-        retour.clear();
+
         /** 1ere etape on demande à l'humain une combinaison */
         String code = HumanPlayer.askConbinaison();
 
@@ -34,8 +31,8 @@ public class ChallengerGame extends AbstractGame {
         int j = 1;
         int size = code.length();
         int maxTry = getGconfig().getTryNum();
-        retour = IAPlayer.init(code, size);
-        proposition = retour.get(0);
+        List<String >retour = IAPlayer.init(code, size);
+        String proposition = retour.get(0);
         String userFeedback = retour.get(1);
 
         /** demande au joueur de vérifier ce que l'ordi a trouvé   */
@@ -64,7 +61,6 @@ public class ChallengerGame extends AbstractGame {
 
                 }
             }
-            retour.clear();
         }
         return result;
     }
