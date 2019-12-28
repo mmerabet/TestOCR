@@ -23,6 +23,8 @@ public class DuelGame extends AbstractGame {
      */
     @Override
     public GameResult playGame(AbstractPlayer iaPlayer, AbstractPlayer HumanPlayer) {
+
+        /** on demande le code aux différentes parties*/
         String codeOfHuman = HumanPlayer.askConbinaison();
         String codeOfIA = iaPlayer.askConbinaison();
         Integer i = 2;
@@ -32,13 +34,18 @@ public class DuelGame extends AbstractGame {
         if (getGconfig().getDevMod() == true){
             System.out.println("DevModeActivé:"+codeOfIA);
         }
+        /**Les deux parties cherchent à craquer le code*/
         List<String> retour = IAPlayer.init(codeOfHuman, size);
         String propositionIa = retour.get(0);
         String userFeedback = retour.get(1);
-        HumanPlayer.feedback(propositionIa, Collections.singletonList(userFeedback));
         System.out.println("Vous devez cracker un code long de " + getGconfig().getSizeCombi() + " caractères avant la machine.\nNombre d'essais : " + i + "/" + maxTry + ".");
         String proposition = HumanPlayer.askConbinaison();
+
+        /**Vérification de ce qu'elles ont rentré*/
+        HumanPlayer.feedback(propositionIa, Collections.singletonList(userFeedback));
         String userFeedbacks = iaPlayer.feedback(proposition, Collections.singletonList(userFeedback));
+
+        /** Premet de savoir si la proposition correspond aux codes*/
         if (isFeedbackWin(userFeedback)) {
             System.out.println("Perdu !!!\nLa machine a craqué votre code en " + j + " tours !\n--------------------------------------------------------------------");
             return GameResult.PLAYER1_WIN;
