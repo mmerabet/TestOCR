@@ -15,7 +15,6 @@ public abstract class AbstractPlayer {
 
     public abstract String askConbinaison();
 
-
     public  final Integer getSizeCombi() {
         return sizeCombi;
     }

@@ -18,7 +18,7 @@ public abstract class AbstractGame {
 
 
     //ici on lance une partie entre deux joueurs (IA et humain)
-    public abstract GameResult playGame(AbstractPlayer player1, AbstractPlayer player2);
+    public abstract GameResult playGame(AbstractPlayer player1, AbstractPlayer player2) throws InterruptedException;
 
     public GameConfig getGconfig() {
         return gconfig;
