@@ -1,8 +1,6 @@
 package player.ia;
 
 import game.duel.DuelGame;
-import menu.ChoixMode;
-import menu.GameMode;
 import player.AbstractPlayer;
 import java.util.ArrayList;
 import java.util.List;

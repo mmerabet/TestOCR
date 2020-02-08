@@ -5,8 +5,6 @@ import game.AbstractGame;
 import game.GameResult;
 import player.AbstractPlayer;
 import player.ia.IAPlayer;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

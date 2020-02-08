@@ -2,10 +2,8 @@ package player.human;
 
 import configuration.GameConfig;
 import player.AbstractPlayer;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Scanner;
 
 public class HumanPlayer extends AbstractPlayer {

@@ -4,7 +4,6 @@ import configuration.GameConfig;
 import game.AbstractGame;
 import game.GameResult;
 import player.AbstractPlayer;
-
 import java.util.List;
 
 public class DefenseurGame extends AbstractGame {
