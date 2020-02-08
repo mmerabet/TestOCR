@@ -22,7 +22,7 @@ public class DefenseurGame extends AbstractGame {
 
         String code = IAPlayer.askConbinaison();
         if (getGconfig().getDevMod()){
-           System.out.println("DevModeActivé:"+code);
+           System.out.println("DevMode Activé:"+code);
         }
         Integer i = 1;
         Integer maxTry = getGconfig().getTryNum();
@@ -30,7 +30,7 @@ public class DefenseurGame extends AbstractGame {
             System.out.println("Vous devez cracker un code long de " + getGconfig().getSizeCombi() + " caractères.\nNombre d'essais : " + i + "/" + maxTry + ".");
             String proposition = HumanPlayer.askConbinaison();
             List<String> userFeedback=null;
-            String userFeedbacks = IAPlayer.feedback(proposition, userFeedback);
+            String userFeedbacks = IAPlayer.feedback(proposition, userFeedback, code);
             if (isFeedbackWin(userFeedbacks)){
                 System.out.println("Gagné !!!\nLe code était bien " + code + "\n--------------------------------------------------------------------");
                 return GameResult.PLAYER2_WIN;

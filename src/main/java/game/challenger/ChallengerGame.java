@@ -25,7 +25,7 @@ public class ChallengerGame extends AbstractGame {
 
         /** 1ere etape on demande à l'humain une combinaison */
         String code = HumanPlayer.askConbinaison();
-
+        System.out.println(code);
         /** 2eme etape dès que nous l'avons, l'algo cherche celle-ci */
 
         int j = 1;
@@ -36,7 +36,7 @@ public class ChallengerGame extends AbstractGame {
         String userFeedback = retour.get(1);
 
         /** demande au joueur de vérifier ce que l'ordi a trouvé   */
-        HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback));
+        HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback), code);
         if (isFeedbackWin(userFeedback)) {
             System.out.println("Perdu !!!\nLa machine a craqué votre code en " + j + " tours !\n--------------------------------------------------------------------");
             result = GameResult.PLAYER1_WIN;
@@ -48,7 +48,7 @@ public class ChallengerGame extends AbstractGame {
                 retour = IAPlayer.verifCode(code, size);
                 proposition = retour.get(0);
                 userFeedback = retour.get(1);
-                HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback));
+                HumanPlayer.feedback(proposition, Collections.singletonList(userFeedback), code);
                 if (isFeedbackWin(userFeedback)) {
                     System.out.println("Perdu !!!\nLa machine a craqué votre code " + j + " tours !\n--------------------------------------------------------------------");
                     result = GameResult.PLAYER1_WIN;

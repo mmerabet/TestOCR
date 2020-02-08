@@ -1,7 +1,9 @@
 package player.ia;
 
+import game.duel.DuelGame;
+import menu.ChoixMode;
+import menu.GameMode;
 import player.AbstractPlayer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +31,19 @@ public class IAPlayer extends AbstractPlayer {
     @Override
     public String askConbinaison() {
         String code = "";
+        String codeIa = "";
+        String codeHu = "";
         for (int i = 0; i < getSizeCombi(); i++) {
             long X = Math.round(-0.5 + Math.random() * 10);
             code = code + (int) X;
         }
-        this.code = code;
-        return code;
+        if (DuelGame.condition=="Hu"){
+            codeHu = code;
+            return codeHu;
+        } else {
+            codeIa = code;
+            return codeIa;
+        }
     }
 
 
@@ -45,7 +54,7 @@ public class IAPlayer extends AbstractPlayer {
      * @return
      */
     @Override
-    public String feedback(String proposition, List<String> userFeedback) {
+    public String feedback(String proposition, List<String> userFeedback, String code) {
         String userFeedbacks = "";
         for (int i = 0; i < proposition.length(); i++) {
 
@@ -88,7 +97,6 @@ public class IAPlayer extends AbstractPlayer {
         }
         retour.add(0, proposition);
         retour.add(1, userFeedback);
-        System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
         return retour;
     }
 
@@ -122,7 +130,6 @@ public class IAPlayer extends AbstractPlayer {
         }
         retour.add(0, proposition);
         retour.add(1, userFeedback);
-        System.out.println("Proposition : " + proposition + "; userFeedback : " + userFeedback);
         return retour;
     }
 }

@@ -5,7 +5,7 @@ import player.AbstractPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import game.duel.DuelGame;
+
 import java.util.Scanner;
 
 public class HumanPlayer extends AbstractPlayer {
@@ -42,11 +42,11 @@ public class HumanPlayer extends AbstractPlayer {
 
 
     @Override
-    public String feedback(String proposition, List<String> userFeedback){
-
+    public String feedback(String proposition, List<String> userFeedback, String code){
         Scanner sc = new Scanner(System.in);
         List<Character> userFeedbacks = new ArrayList<>();
         String test = userFeedback.get(0);
+
         for (int i=0; i<getSizeCombi();i++){
             userFeedbacks.add(i,test.charAt(i));
         }

@@ -19,7 +19,7 @@ public abstract class AbstractPlayer {
         return sizeCombi;
     }
 
-    public abstract String feedback(String proposition, List<String> userFeedback);
+    public abstract String feedback(String proposition, List<String> userFeedback, String code);
 
 
 }
